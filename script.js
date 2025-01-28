@@ -54,9 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---- Submit Button ----
   submitBtn.addEventListener("click", () => {
-    // Convert the canvases to data URLs (base64 PNG)
-    const dataURL1 = canvas.toDataURL("image/png");
-    const dataURL2 = canvas2.toDataURL("image/png");
+    // Convert the canvas to a data URL (base64 PNG)
+    const dataURL = canvas.toDataURL("image/png");
 
     // Send to backend via fetch
     fetch("http://localhost:3000/send", {
@@ -64,12 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ imageData1: dataURL1, imageData2: dataURL2 }),
+      body: JSON.stringify({ imageData: dataURL }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        alert("Canvases submitted successfully!");
+        alert("Canvas submitted successfully!");
       })
       .catch((error) => {
         console.error("Error:", error);
